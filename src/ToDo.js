@@ -3,7 +3,7 @@ function ToDo(props) {
     const [checkboxstate, setCheckboxstate] = useState(props.completed);
 
     function changeState(){
-        if(checkboxstate = true){
+        if(checkboxstate === true){
             setCheckboxstate(false)
         }else{
             setCheckboxstate(true)
@@ -12,10 +12,10 @@ function ToDo(props) {
 
     return (
       <>
-      <p>User Id {props.userId}</p>
-      <p>Id {props.idd}</p>
+      <p>User Id: {props.userId}</p>
+      <p>Id: {props.idd}</p>
       <p>{props.title}</p>
-      <input type="checkbox" onChange={() => changeState()} defaultChecked={checkboxstate} />
+      <input type="checkbox" onChange={() => changeState()} checked={checkboxstate} />
       </>
     );
   }

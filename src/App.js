@@ -14,7 +14,7 @@ function App() {
   return (
     <>
     {/* <p>Staff</p> */}
-    <ToDo userId={todo.userId} idd={todo.id} title={todo.title} completed={todo.completed} />
+    <ToDo {...todo}/>
     </>
   );
 }
