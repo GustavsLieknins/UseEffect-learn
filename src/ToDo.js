@@ -13,7 +13,7 @@ function ToDo(props) {
     return (
       <>
       <p>User Id: {props.userId}</p>
-      <p>Id: {props.idd}</p>
+      <p>Id: {props.id}</p>
       <p>{props.title}</p>
       <input type="checkbox" onChange={() => changeState()} checked={checkboxstate} />
       </>
