@@ -13,7 +13,7 @@ function Comment() {
   
       meoww();
     }, []);
-    function UserGreeting() {
+    function maju() {
         if(loading == false){
         return <>
             <p>Post id: {comment.postId}</p>
@@ -28,7 +28,7 @@ function Comment() {
       }
     return (
       <>
-    {UserGreeting()}
+    {maju()}
       </>
     );
   }
