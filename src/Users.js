@@ -20,18 +20,18 @@ function Postslist() {
     // <p>Id: {props.id}</p>
     // <p>Title: {props.title}</p>
     // <p>Body: {props.body}</p>
-    function maju() {
+    function majus() {
         if(loading == false){
         return user.map(userr => {
-            return <PostsList name={userr[1]} />
+            return <PostsList name={userr.name[1]} />
         })
         }else{
-            return <p>loading!!!!!!!!!</p>
+            return <p>loadingg!!!!!!!!!</p>
         }
     }
     return (
       <>
-        {maju()}
+        <PostsList />
       </>
     );
   }

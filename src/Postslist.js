@@ -1,39 +1,52 @@
 import React, { useState, useEffect } from 'react';
 import Post from "./Post.js";
+
 function Postslist(props) {
-    const [posts, setPosts] = useState({});
-    const [user, setUser] = useState({});
+    const [posts, setPosts] = useState([]);
+    const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-      async function meoww() {
-        const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-        const data = await response.json();
-        setPosts(data);
-        setLoading(!true);
-        };
-  
-      meoww();
+        async function fetchPosts() {
+                const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+                const data = await response.json();
+                setPosts(data);
+                setLoading(false);
+        }
+        fetchPosts();
     }, []);
 
-    // <p>User id: {props.userId}</p>
-    // <p>Id: {props.id}</p>
-    // <p>Title: {props.title}</p>
-    // <p>Body: {props.body}</p>
-    function maju() {
-        if(loading == false){
-        return posts.map(post => {
-            return <Post name={props.name} userId={post.userId} id={post.id} title={post.title} body={post.body} />
-        })
-        }else{
-            return <p>loading!!!!!!!!!</p>
+    useEffect(() => {
+        async function fetchUsers() {
+                const response = await fetch("https://jsonplaceholder.typicode.com/users");
+                const data = await response.json();
+                setUsers(data);
         }
+        fetchUsers();
+    }, []);
+
+    function getUserById(userId) {
+        return users[userId];
     }
+
+    function Posts() {
+        if (loading) {
+            return <p>Loading...</p>;
+        }
+
+        return posts.map(post => {
+            const user = getUserById(post.userId);
+            return (
+                <Post key={post.id} name={user ? user.name : 'Unknown User'} id={post.id} title={post.title} body={post.body} />
+            );
+        });
+    }
+
     return (
-      <>
-        {maju()}
-      </>
+          <>
+            {Posts()}
+          </>
     );
-  }
-  
-  export default Postslist;
+}
+
+export default Postslist;
