@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Post from "./Post.js";
 import Commentt from "./Commentt.js";
 
-function Postslist(props) {
+function PostList(props) {
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState([]);
     const [comments, setComments] = useState([]);
@@ -13,7 +13,6 @@ function Postslist(props) {
                 const response = await fetch("https://jsonplaceholder.typicode.com/posts");
                 const data = await response.json();
                 setPosts(data);
-                setLoading(false);
         }
         fetchPosts();
     }, []);
@@ -37,39 +36,29 @@ function Postslist(props) {
     }, []);
 
     function getUserByIdUser(userId) {
-        return users[userId];
+        const username = users.filter((user) => userId === user.id);
+        return username[0].name;
     }
     function getUserByIdComment(userId) {
-    // const user = users[userId];
-    return comments[userId].map((koment) => {
-        return <Commentt  comment={koment.body}/>
+    return comments.map((koment, i) => {
+        if(koment.postId == userId ){
+            return <Commentt key={i}  comment={koment.body}/>
+        }
     });
     }
-    // function getCommentByIdUser(userId) {
-    //     return comments[userId];
-    // }
-
-    // function getCommentByIdUser(){
-    // const comentari = comments.map((commentss, i) => {
-    //   return <li>Komentars: {i} {commentss.body}</li>
-    // })
-    // }
-
     function postsRandomFunction() {
-        if (posts === [] && users === []) {
+        if (posts.length === 0 || users.length === 0 || comments.length === 0) {
             return <p>Loading...</p>;
         }else{
 
         return posts.map(post => {
             const user = getUserByIdUser(post.userId);
-            // const comments = getUserByIdComment(post.userId);
-            // const commenttt = getCommentByIdUser(post.userId);
 
             
             return (
                 <>
-                <Post key={post.id}  name={user ? user.name : 'nav usera'} id={post.id} title={post.title} body={post.body} />
-                {getUserByIdComment(user.body)}
+                    <Post key={post.id}  name={user} id={post.id} title={post.title} body={post.body} />
+                        {getUserByIdComment(post.userId)}
                 </>
             );
         });
@@ -83,4 +72,4 @@ function Postslist(props) {
     );
 }
 
-export default Postslist;
+export default PostList;
