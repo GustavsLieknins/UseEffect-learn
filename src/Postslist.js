@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Post from "./Post.js";
 import Commentt from "./Commentt.js";
 
+// Dummy comment from Jēkabs
+
 function Postslist(props) {
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState([]);
