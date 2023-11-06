@@ -30,7 +30,7 @@ function App() {
   // })
   return (
     <>
-    {loading ? <p>loading...</p> : <ToDo {...toDo}/>}
+    {/* {loading ? <p>loading...</p> : <ToDo {...toDo}/>} */}
     {/* <Comment /> */}
     <PostsLists />
     </>
